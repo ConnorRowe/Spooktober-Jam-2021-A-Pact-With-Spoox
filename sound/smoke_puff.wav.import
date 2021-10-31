@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/smoke_puff.wav-32824a0657e0600912b9124373bc7d31.sample"
+
+[deps]
+
+source_file="res://sound/smoke_puff.wav"
+dest_files=[ "res://.import/smoke_puff.wav-32824a0657e0600912b9124373bc7d31.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/light switch.wav-5dcc25284c86e8541a8a8d818a803b24.sample"
+
+[deps]
+
+source_file="res://sound/light switch.wav"
+dest_files=[ "res://.import/light switch.wav-5dcc25284c86e8541a8a8d818a803b24.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

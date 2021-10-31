@@ -1,0 +1,86 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://textures/ghostie_anim.png" type="Texture" id=1]
+[ext_resource path="res://scripts/Spook.cs" type="Script" id=2]
+[ext_resource path="res://sound/Spooks/moan.wav" type="AudioStream" id=3]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 1 )
+region = Rect2( 0, 0, 69, 59 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 1 )
+region = Rect2( 69, 0, 69, 59 )
+
+[sub_resource type="SpriteFrames" id=3]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[sub_resource type="Animation" id=4]
+resource_name = "Spook"
+length = 4.0
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("AnimatedSprite:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.33, 0.99, 1.99, 3, 3.51, 3.63 ),
+"transitions": PoolRealArray( 2, -2, -2, -2, -2, -2, -2, 0.5 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 1.25, 1 ), Vector2( 1, 1 ), Vector2( 0.8, 0.8 ), Vector2( 1.2, 1.2 ), Vector2( 0.8, 0.8 ), Vector2( 1.2, 1.2 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("BG:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.14, 0.33, 0.99, 2, 3, 3.51, 3.63 ),
+"transitions": PoolRealArray( 2, -2, -2, -0.5, -0.5, -0.5, -0.5, 0.5 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 2.25, 2.25 ), Vector2( 2, 2 ), Vector2( 2.2, 2.2 ), Vector2( 2, 2 ), Vector2( 2.2, 2.2 ), Vector2( 2, 2 ), Vector2( 0, 0 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("BG:rotation_degrees")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0.01, 1.82, 3.63 ),
+"transitions": PoolRealArray( 0.5, -2, 0.5 ),
+"update": 0,
+"values": [ -15.0, 15.0, -15.0 ]
+}
+
+[node name="Spook" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="BG" type="AnimatedSprite" parent="."]
+modulate = Color( 1, 1, 1, 0.176471 )
+position = Vector2( 0, -37.3419 )
+rotation = -0.261799
+scale = Vector2( 1e-05, 1e-05 )
+frames = SubResource( 3 )
+playing = true
+
+[node name="AnimatedSprite" type="AnimatedSprite" parent="."]
+position = Vector2( 0, -37.3419 )
+scale = Vector2( 1e-05, 1e-05 )
+frames = SubResource( 3 )
+playing = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/Spook = SubResource( 4 )
+
+[node name="SpookPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 3 )
+bus = "Reverb SFX"

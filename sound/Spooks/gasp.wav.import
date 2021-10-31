@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/gasp.wav-9be4b1a35a361fe255972a7046d1c581.sample"
+
+[deps]
+
+source_file="res://sound/Spooks/gasp.wav"
+dest_files=[ "res://.import/gasp.wav-9be4b1a35a361fe255972a7046d1c581.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

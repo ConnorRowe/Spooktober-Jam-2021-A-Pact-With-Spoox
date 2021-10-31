@@ -1,0 +1,13 @@
+[gd_scene load_steps=3 format=2]
+
+[ext_resource path="res://scripts/GlobalNodes.cs" type="Script" id=1]
+
+[sub_resource type="AudioStreamRandomPitch" id=1]
+random_pitch = 1.2
+
+[node name="GlobalNodes" type="Node"]
+script = ExtResource( 1 )
+
+[node name="RandomPitchPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 1 )
+bus = "Reverb SFX"

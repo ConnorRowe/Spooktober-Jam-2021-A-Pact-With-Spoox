@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/pip.wav-d8f3e5079b97e5364762c7bfde3edd23.sample"
+
+[deps]
+
+source_file="res://sound/pip.wav"
+dest_files=[ "res://.import/pip.wav-d8f3e5079b97e5364762c7bfde3edd23.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

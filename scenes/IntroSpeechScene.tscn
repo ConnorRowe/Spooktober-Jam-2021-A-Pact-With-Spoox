@@ -1,0 +1,15 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/SpeechScene.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/IntroSpeechScene.cs" type="Script" id=2]
+[ext_resource path="res://scenes/World.tscn" type="PackedScene" id=3]
+
+[node name="IntroScene" instance=ExtResource( 1 )]
+script = ExtResource( 2 )
+nextScene = ExtResource( 3 )
+
+[node name="SkipButton" parent="." index="4"]
+shortcut_in_tooltip = false
+
+[node name="Ghostie" parent="Ghostiebg" index="0"]
+frame = 1

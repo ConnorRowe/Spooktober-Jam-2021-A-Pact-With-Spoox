@@ -1,0 +1,375 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://textures/garden_walls.png" type="Texture" id=1]
+[ext_resource path="res://textures/kerb.png" type="Texture" id=2]
+[ext_resource path="res://textures/garden_ground.png" type="Texture" id=3]
+[ext_resource path="res://textures/door.png" type="Texture" id=4]
+[ext_resource path="res://textures/grass.png" type="Texture" id=5]
+[ext_resource path="res://textures/house_wall.png" type="Texture" id=6]
+[ext_resource path="res://textures/house_window.png" type="Texture" id=7]
+[ext_resource path="res://scripts/HouseBlock.cs" type="Script" id=8]
+[ext_resource path="res://textures/Banners/banner_trick_or_treat.png" type="Texture" id=9]
+[ext_resource path="res://textures/BigPumpkins/pumpkin_large_base.png" type="Texture" id=10]
+[ext_resource path="res://textures/pumpkin_mini_base.png" type="Texture" id=11]
+[ext_resource path="res://textures/Spiderwebs/spiderweb_1.png" type="Texture" id=12]
+[ext_resource path="res://textures/door_person.png" type="Texture" id=13]
+[ext_resource path="res://textures/ver_wall_1.png" type="Texture" id=14]
+[ext_resource path="res://textures/ver_wall_2.png" type="Texture" id=15]
+
+[sub_resource type="AtlasTexture" id=1]
+atlas = ExtResource( 13 )
+region = Rect2( 0, 0, 74, 108 )
+
+[sub_resource type="AtlasTexture" id=2]
+atlas = ExtResource( 13 )
+region = Rect2( 74, 0, 74, 108 )
+
+[sub_resource type="AtlasTexture" id=3]
+atlas = ExtResource( 13 )
+region = Rect2( 148, 0, 74, 108 )
+
+[sub_resource type="AtlasTexture" id=4]
+atlas = ExtResource( 13 )
+region = Rect2( 222, 0, 74, 108 )
+
+[sub_resource type="SpriteFrames" id=5]
+animations = [ {
+"frames": [ SubResource( 1 ), SubResource( 2 ), SubResource( 3 ), SubResource( 4 ) ],
+"loop": false,
+"name": "default",
+"speed": 5.0
+} ]
+
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 320, 10 )
+
+[sub_resource type="CapsuleShape2D" id=7]
+height = 48.0
+
+[node name="HouseBlock" type="YSort"]
+script = ExtResource( 8 )
+
+[node name="GardenGround" type="Sprite" parent="."]
+z_index = -2
+texture = ExtResource( 3 )
+centered = false
+offset = Vector2( 0, 224 )
+
+[node name="GardenWall" type="Sprite" parent="."]
+position = Vector2( 0, 291 )
+texture = ExtResource( 1 )
+centered = false
+offset = Vector2( 0, -42 )
+
+[node name="Kerb" type="Sprite" parent="."]
+position = Vector2( 0, 295 )
+z_index = -2
+texture = ExtResource( 2 )
+centered = false
+
+[node name="Grass1" type="Sprite" parent="." groups=[
+"House1",
+]]
+position = Vector2( 371, 232 )
+texture = ExtResource( 5 )
+centered = false
+offset = Vector2( 0, -3 )
+region_rect = Rect2( 0, 0, 250, 59 )
+
+[node name="Grass2" type="Sprite" parent="." groups=[
+"House2",
+]]
+position = Vector2( 51, 232 )
+texture = ExtResource( 5 )
+centered = false
+offset = Vector2( 0, -3 )
+
+[node name="HouseWall1" type="Sprite" parent="."]
+position = Vector2( 0, 224 )
+texture = ExtResource( 6 )
+centered = false
+offset = Vector2( 0, -224 )
+
+[node name="Door1" type="Sprite" parent="." groups=[
+"House1",
+]]
+position = Vector2( 18, 224 )
+texture = ExtResource( 4 )
+centered = false
+offset = Vector2( 0, -99 )
+
+[node name="DoorPerson" type="AnimatedSprite" parent="Door1" groups=[
+"House1",
+]]
+visible = false
+position = Vector2( 0, -102 )
+frames = SubResource( 5 )
+centered = false
+
+[node name="HouseWall2" type="Sprite" parent="."]
+position = Vector2( 320, 224 )
+texture = ExtResource( 6 )
+centered = false
+offset = Vector2( 0, -224 )
+
+[node name="Door2" type="Sprite" parent="." groups=[
+"House2",
+]]
+position = Vector2( 338, 224 )
+texture = ExtResource( 4 )
+centered = false
+offset = Vector2( 0, -99 )
+
+[node name="DoorPerson" type="AnimatedSprite" parent="Door2" groups=[
+"House2",
+]]
+visible = false
+position = Vector2( 0, -102 )
+frames = SubResource( 5 )
+centered = false
+
+[node name="Window1" type="Sprite" parent="." groups=[
+"House1",
+]]
+position = Vector2( 128, 183 )
+texture = ExtResource( 7 )
+centered = false
+offset = Vector2( 0, -83 )
+
+[node name="Spiderweb" type="Sprite" parent="Window1" groups=[
+"House1",
+]]
+position = Vector2( 0, -83 )
+texture = ExtResource( 12 )
+centered = false
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Banner" type="Sprite" parent="Window1" groups=[
+"House1",
+]]
+position = Vector2( 5, -81 )
+texture = ExtResource( 9 )
+centered = false
+
+[node name="Window2" type="Sprite" parent="." groups=[
+"House2",
+]]
+position = Vector2( 448, 183 )
+texture = ExtResource( 7 )
+centered = false
+offset = Vector2( 0, -83 )
+
+[node name="Spiderweb" type="Sprite" parent="Window2" groups=[
+"House2",
+]]
+position = Vector2( 0, -83 )
+texture = ExtResource( 12 )
+centered = false
+__meta__ = {
+"_editor_description_": ""
+}
+
+[node name="Banner" type="Sprite" parent="Window2" groups=[
+"House2",
+]]
+position = Vector2( 5, -81 )
+texture = ExtResource( 9 )
+centered = false
+
+[node name="WallColliders" type="StaticBody2D" parent="."]
+position = Vector2( -173, 0 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="WallColliders"]
+position = Vector2( -23.3, 0 )
+polygon = PoolVector2Array( 256, 295, 512, 295, 515, 291, 260, 291 )
+
+[node name="CollisionPolygon2D2" type="CollisionPolygon2D" parent="WallColliders"]
+position = Vector2( 296, 0 )
+polygon = PoolVector2Array( 256, 295, 512, 295, 515, 291, 260, 291 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="WallColliders"]
+position = Vector2( 493, 213 )
+z_index = 1
+shape = SubResource( 6 )
+
+[node name="CollisionShape2D2" type="CollisionShape2D" parent="WallColliders"]
+position = Vector2( 493, 369 )
+z_index = 1
+shape = SubResource( 6 )
+
+[node name="CollisionPolygon2D3" type="CollisionPolygon2D" parent="WallColliders"]
+polygon = PoolVector2Array( 494, 223, 485, 223, 449, 291, 458, 291 )
+
+[node name="CollisionPolygon2D4" type="CollisionPolygon2D" parent="WallColliders"]
+position = Vector2( 320, 0 )
+polygon = PoolVector2Array( 494, 223, 485, 223, 449, 291, 458, 291 )
+
+[node name="House1Decs" type="YSort" parent="." groups=[
+"House1",
+]]
+
+[node name="ByTheDoor" type="Sprite" parent="House1Decs" groups=[
+"BigPumpkin",
+"House1",
+]]
+position = Vector2( 110, 239 )
+texture = ExtResource( 10 )
+offset = Vector2( 0.5, -22.5 )
+
+[node name="UnderTheWindow" type="Sprite" parent="House1Decs" groups=[
+"BigPumpkin",
+"House1",
+]]
+position = Vector2( 218, 251 )
+texture = ExtResource( 10 )
+centered = false
+offset = Vector2( 0, -44 )
+
+[node name="OnTheWall" type="Sprite" parent="House1Decs" groups=[
+"BigPumpkin",
+"House1",
+]]
+position = Vector2( 76, 292 )
+texture = ExtResource( 10 )
+offset = Vector2( 6.5, -61.5 )
+
+[node name="OnTheWallMini" type="Sprite" parent="House1Decs" groups=[
+"House1",
+]]
+position = Vector2( 120, 291 )
+texture = ExtResource( 11 )
+centered = false
+offset = Vector2( -11, -58 )
+
+[node name="WindowsillMini" type="Sprite" parent="House1Decs" groups=[
+"House1",
+]]
+position = Vector2( 180, 224 )
+texture = ExtResource( 11 )
+centered = false
+offset = Vector2( -11, -58 )
+
+[node name="PossibleCrows" type="Node2D" parent="House1Decs" groups=[
+"House1",
+]]
+
+[node name="Position2D" type="Position2D" parent="House1Decs/PossibleCrows" groups=[
+"House1",
+]]
+position = Vector2( 23, 316 )
+
+[node name="Position2D2" type="Position2D" parent="House1Decs/PossibleCrows" groups=[
+"House1",
+]]
+position = Vector2( 31, 251 )
+
+[node name="Position2D3" type="Position2D" parent="House1Decs/PossibleCrows" groups=[
+"House1",
+]]
+position = Vector2( 186, 243 )
+
+[node name="House2Decs" type="YSort" parent="." groups=[
+"House2",
+]]
+
+[node name="ByTheDoor" type="Sprite" parent="House2Decs" groups=[
+"BigPumpkin",
+"House2",
+]]
+position = Vector2( 462, 242 )
+texture = ExtResource( 10 )
+offset = Vector2( 0.5, -22.5 )
+
+[node name="UnderTheWindow" type="Sprite" parent="House2Decs" groups=[
+"BigPumpkin",
+"House2",
+]]
+position = Vector2( 525, 236 )
+texture = ExtResource( 10 )
+centered = false
+offset = Vector2( 0, -44 )
+
+[node name="OnTheWall" type="Sprite" parent="House2Decs" groups=[
+"BigPumpkin",
+"House2",
+]]
+position = Vector2( 418, 292 )
+texture = ExtResource( 10 )
+offset = Vector2( 6.5, -61.5 )
+
+[node name="OnTheWallMini" type="Sprite" parent="House2Decs" groups=[
+"House2",
+]]
+position = Vector2( 397, 291 )
+texture = ExtResource( 11 )
+centered = false
+offset = Vector2( -11, -58 )
+
+[node name="WindowsillMini" type="Sprite" parent="House2Decs" groups=[
+"House2",
+]]
+position = Vector2( 573, 224 )
+texture = ExtResource( 11 )
+centered = false
+offset = Vector2( -11, -58 )
+
+[node name="PossibleCrows" type="Node2D" parent="House2Decs" groups=[
+"House2",
+]]
+
+[node name="Position2D" type="Position2D" parent="House2Decs/PossibleCrows" groups=[
+"House2",
+]]
+position = Vector2( 366, 311 )
+
+[node name="Position2D2" type="Position2D" parent="House2Decs/PossibleCrows" groups=[
+"House2",
+]]
+position = Vector2( 381, 246 )
+
+[node name="Position2D3" type="Position2D" parent="House2Decs/PossibleCrows" groups=[
+"House2",
+]]
+position = Vector2( 529, 247 )
+
+[node name="DoorKnockArea1" type="Area2D" parent="." groups=[
+"House1",
+]]
+position = Vector2( 56, 229 )
+monitoring = false
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorKnockArea1" groups=[
+"House1",
+]]
+rotation = 1.5708
+shape = SubResource( 7 )
+
+[node name="DoorKnockArea2" type="Area2D" parent="." groups=[
+"House2",
+]]
+position = Vector2( 375, 229 )
+monitoring = false
+collision_layer = 2
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DoorKnockArea2" groups=[
+"House2",
+]]
+rotation = 1.5708
+shape = SubResource( 7 )
+
+[node name="VertWall1" type="Sprite" parent="."]
+position = Vector2( 298, 249 )
+texture = ExtResource( 14 )
+centered = false
+offset = Vector2( -21, -67 )
+
+[node name="VertWall2" type="Sprite" parent="."]
+position = Vector2( 618, 249 )
+texture = ExtResource( 15 )
+centered = false
+offset = Vector2( -21, -67 )

@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/dunngeon.ogg-42785bd888fa402999abfdf809a1967c.oggstr"
+
+[deps]
+
+source_file="res://sound/dunngeon.ogg"
+dest_files=[ "res://.import/dunngeon.ogg-42785bd888fa402999abfdf809a1967c.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

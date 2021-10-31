@@ -1,0 +1,32 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://textures/potion_bottle.png" type="Texture" id=1]
+[ext_resource path="res://textures/potion_fill.png" type="Texture" id=2]
+[ext_resource path="res://scripts/PotionDisplay.cs" type="Script" id=3]
+
+[sub_resource type="Shader" id=21]
+code = "shader_type canvas_item;
+
+uniform vec4 potion_colour: hint_color = vec4(1f);
+uniform sampler2D potion_fill_tex;
+
+void fragment()
+{
+	vec4 base = texture(TEXTURE, UV);
+	vec4 fill = texture(potion_fill_tex, UV) * potion_colour;
+	
+	COLOR = mix(base, fill, 1f - base.a);
+}"
+
+[sub_resource type="ShaderMaterial" id=2]
+resource_local_to_scene = true
+shader = SubResource( 21 )
+shader_param/potion_colour = Color( 0.709804, 0.533333, 0.254902, 1 )
+shader_param/potion_fill_tex = ExtResource( 2 )
+
+[node name="PotionDisplay" type="Sprite"]
+material = SubResource( 2 )
+texture = ExtResource( 1 )
+centered = false
+offset = Vector2( -21, -42 )
+script = ExtResource( 3 )

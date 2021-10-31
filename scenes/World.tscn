@@ -1,0 +1,109 @@
+[gd_scene load_steps=13 format=2]
+
+[ext_resource path="res://scenes/Player.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scenes/HouseBlock.tscn" type="PackedScene" id=2]
+[ext_resource path="res://scripts/World.cs" type="Script" id=3]
+[ext_resource path="res://scenes/SweetCounter.tscn" type="PackedScene" id=4]
+[ext_resource path="res://shaders/RadialMask.gdshader" type="Shader" id=5]
+[ext_resource path="res://textures/timer_base.png" type="Texture" id=6]
+[ext_resource path="res://textures/timer_overlay.png" type="Texture" id=7]
+[ext_resource path="res://sound/dunngeon.ogg" type="AudioStream" id=8]
+[ext_resource path="res://textures/controls.png" type="Texture" id=9]
+
+[sub_resource type="ShaderMaterial" id=1]
+shader = ExtResource( 5 )
+shader_param/percent = 1.0
+
+[sub_resource type="Shader" id=2]
+code = "shader_type canvas_item;
+
+uniform float percent : hint_range(0, 1);
+
+const float diamondPixelSize = 48f;
+
+void fragment() {
+    float xFraction = fract(FRAGCOORD.x / diamondPixelSize);
+    float yFraction = fract(FRAGCOORD.y / diamondPixelSize);
+    
+    float xDistance = abs(xFraction - 0.5);
+    float yDistance = abs(yFraction - 0.5);
+    
+    if (xDistance + yDistance > percent * 2f) {
+        discard;
+    }
+}"
+
+[sub_resource type="ShaderMaterial" id=3]
+shader = SubResource( 2 )
+shader_param/percent = null
+
+[node name="World" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="debugLabel" type="Label" parent="CanvasLayer"]
+visible = false
+modulate = Color( 0, 0, 0, 1 )
+margin_left = 26.0
+margin_top = 71.0
+margin_right = 142.0
+margin_bottom = 129.0
+text = "debug"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SweetCounter" parent="CanvasLayer" instance=ExtResource( 4 )]
+position = Vector2( 8, 8 )
+
+[node name="Clock" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 320, 30 )
+texture = ExtResource( 6 )
+
+[node name="Overlay" type="Sprite" parent="CanvasLayer/Clock"]
+material = SubResource( 1 )
+scale = Vector2( -1, 1 )
+texture = ExtResource( 7 )
+
+[node name="Controls" type="Sprite" parent="CanvasLayer"]
+position = Vector2( 321, 158 )
+texture = ExtResource( 9 )
+
+[node name="TransitionRect" type="ColorRect" parent="CanvasLayer"]
+visible = false
+material = SubResource( 3 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+mouse_filter = 2
+color = Color( 0.117647, 0.101961, 0.12549, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="Player" parent="YSort" instance=ExtResource( 1 )]
+position = Vector2( 0, 316 )
+
+[node name="Camera2D" type="Camera2D" parent="YSort/Player"]
+current = true
+process_mode = 0
+limit_top = 0
+limit_bottom = 360
+limit_smoothed = true
+smoothing_enabled = true
+
+[node name="HouseBlock" parent="YSort" instance=ExtResource( 2 )]
+position = Vector2( -640, 0 )
+
+[node name="HouseBlock2" parent="YSort" instance=ExtResource( 2 )]
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+autoplay = true
+bus = "Music"
+
+[node name="Lighting" type="CanvasModulate" parent="."]

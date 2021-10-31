@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/timeout_music.ogg-1303df75deea4c3a1e3114b2490c0dba.oggstr"
+
+[deps]
+
+source_file="res://sound/timeout_music.ogg"
+dest_files=[ "res://.import/timeout_music.ogg-1303df75deea4c3a1e3114b2490c0dba.oggstr" ]
+
+[params]
+
+loop=false
+loop_offset=0

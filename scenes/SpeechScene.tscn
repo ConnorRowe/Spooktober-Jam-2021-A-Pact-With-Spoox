@@ -1,0 +1,274 @@
+[gd_scene load_steps=23 format=2]
+
+[ext_resource path="res://font/HennyPenny-Regular.ttf" type="DynamicFontData" id=1]
+[ext_resource path="res://textures/char_anim.png" type="Texture" id=2]
+[ext_resource path="res://scripts/SpeechScene.cs" type="Script" id=3]
+[ext_resource path="res://sound/pip.wav" type="AudioStream" id=4]
+[ext_resource path="res://textures/ghostie_bg.png" type="Texture" id=5]
+[ext_resource path="res://textures/ghostie_anim.png" type="Texture" id=6]
+[ext_resource path="res://textures/player_bg.png" type="Texture" id=7]
+[ext_resource path="res://sound/track 1.ogg" type="AudioStream" id=8]
+
+[sub_resource type="StyleBoxFlat" id=1]
+content_margin_left = 8.0
+content_margin_right = 8.0
+content_margin_top = 8.0
+content_margin_bottom = 8.0
+bg_color = Color( 0.160784, 0.113725, 0.168627, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.321569, 0.2, 0.247059, 1 )
+corner_detail = 1
+
+[sub_resource type="DynamicFont" id=2]
+extra_spacing_char = 1
+extra_spacing_space = 2
+font_data = ExtResource( 1 )
+
+[sub_resource type="StyleBoxFlat" id=3]
+bg_color = Color( 0.168627, 0.168627, 0.270588, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.227451, 0.247059, 0.368627, 1 )
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id=4]
+bg_color = Color( 0.184314, 0.341176, 0.32549, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.231373, 0.490196, 0.309804, 1 )
+corner_detail = 1
+
+[sub_resource type="StyleBoxFlat" id=5]
+bg_color = Color( 0.0784314, 0.0941176, 0.180392, 1 )
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color( 0.168627, 0.168627, 0.270588, 1 )
+corner_detail = 1
+
+[sub_resource type="DynamicFont" id=6]
+outline_color = Color( 0.960784, 1, 0.909804, 1 )
+font_data = ExtResource( 1 )
+
+[sub_resource type="AudioStreamRandomPitch" id=7]
+audio_stream = ExtResource( 4 )
+random_pitch = 1.3
+
+[sub_resource type="AtlasTexture" id=8]
+atlas = ExtResource( 6 )
+region = Rect2( 0, 0, 69, 59 )
+
+[sub_resource type="AtlasTexture" id=9]
+atlas = ExtResource( 6 )
+region = Rect2( 69, 0, 69, 59 )
+
+[sub_resource type="SpriteFrames" id=10]
+animations = [ {
+"frames": [ SubResource( 8 ), SubResource( 9 ) ],
+"loop": true,
+"name": "default",
+"speed": 8.0
+} ]
+
+[sub_resource type="Shader" id=11]
+code = "shader_type canvas_item;
+
+uniform float percent : hint_range(0, 1);
+
+const float diamondPixelSize = 48f;
+
+void fragment() {
+    float xFraction = fract(FRAGCOORD.x / diamondPixelSize);
+    float yFraction = fract(FRAGCOORD.y / diamondPixelSize);
+    
+    float xDistance = abs(xFraction - 0.5);
+    float yDistance = abs(yFraction - 0.5);
+    
+    if (xDistance + yDistance > percent * 2f) {
+        discard;
+    }
+}"
+
+[sub_resource type="ShaderMaterial" id=12]
+shader = SubResource( 11 )
+shader_param/percent = null
+
+[sub_resource type="Animation" id=13]
+resource_name = "OtherTalk"
+length = 0.4
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Ghostiebg/Ghostie:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.26 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.9, 0.9 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+
+[sub_resource type="Animation" id=14]
+resource_name = "PlayerTalk"
+length = 0.4
+loop = true
+step = 0.01
+tracks/0/type = "value"
+tracks/0/path = NodePath("Playerbg/Player:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.15, 0.26 ),
+"transitions": PoolRealArray( 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.9, 0.9 ), Vector2( 1.05, 1.05 ), Vector2( 1, 1 ) ]
+}
+
+[node name="SpeechScene" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Bg" type="ColorRect" parent="."]
+margin_right = 640.0
+margin_bottom = 360.0
+color = Color( 0.129412, 0.0941176, 0.105882, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Playerbg" type="Sprite" parent="."]
+position = Vector2( 149, 183 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 7 )
+offset = Vector2( -0.5, -0.5 )
+
+[node name="Player" type="Sprite" parent="Playerbg"]
+position = Vector2( 0, -9 )
+scale = Vector2( 0.9, 0.9 )
+texture = ExtResource( 2 )
+flip_h = true
+hframes = 4
+vframes = 2
+
+[node name="PanelContainer" type="PanelContainer" parent="."]
+margin_left = 6.0
+margin_top = 238.0
+margin_right = 371.0
+margin_bottom = 354.0
+rect_min_size = Vector2( 316, 116 )
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PlayerSpeech" type="RichTextLabel" parent="PanelContainer"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 357.0
+margin_bottom = 108.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PanelContainer2" type="PanelContainer" parent="."]
+margin_left = 233.0
+margin_top = 6.0
+margin_right = 633.0
+margin_bottom = 122.0
+rect_min_size = Vector2( 316, 116 )
+custom_styles/panel = SubResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="OtherSpeech" type="RichTextLabel" parent="PanelContainer2"]
+margin_left = 8.0
+margin_top = 8.0
+margin_right = 392.0
+margin_bottom = 108.0
+custom_fonts/normal_font = SubResource( 2 )
+bbcode_enabled = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SkipButton" type="Button" parent="."]
+margin_left = 497.0
+margin_top = 310.0
+margin_right = 634.0
+margin_bottom = 354.0
+focus_mode = 0
+custom_styles/hover = SubResource( 3 )
+custom_styles/pressed = SubResource( 4 )
+custom_styles/normal = SubResource( 5 )
+enabled_focus_mode = 0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="RichTextLabel" type="RichTextLabel" parent="SkipButton"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 14.0
+margin_top = 8.0
+mouse_filter = 2
+custom_fonts/normal_font = SubResource( 6 )
+custom_colors/default_color = Color( 0.960784, 1, 0.909804, 1 )
+bbcode_enabled = true
+bbcode_text = "[wave amp=50 freq=2]    Skip scene >>[/wave]"
+text = "    Skip scene >>"
+scroll_active = false
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="PipPlayer" type="AudioStreamPlayer" parent="."]
+stream = SubResource( 7 )
+bus = "SFX"
+
+[node name="Ghostiebg" type="Sprite" parent="."]
+position = Vector2( 478, 199 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 5 )
+
+[node name="Ghostie" type="AnimatedSprite" parent="Ghostiebg"]
+scale = Vector2( 0.9, 0.9 )
+frames = SubResource( 10 )
+frame = 1
+playing = true
+
+[node name="TransitionRect" type="ColorRect" parent="."]
+material = SubResource( 12 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+rect_min_size = Vector2( 640, 360 )
+mouse_filter = 2
+color = Color( 0.117647, 0.101961, 0.12549, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/OtherTalk = SubResource( 13 )
+anims/PlayerTalk = SubResource( 14 )
+
+[node name="Tween" type="Tween" parent="."]
+
+[node name="MusicPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource( 8 )
+autoplay = true
+bus = "Music"
